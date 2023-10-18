@@ -13,12 +13,4 @@ class MiApp extends StatelessWidget{
       home: LoginView()
     );
   }
-  
-
-  }
-
-
-
-
-  
-
+}

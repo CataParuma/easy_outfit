@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-
- class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -51,9 +50,9 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   int _currentImageIndex = 0;
   List<String> imagePaths = [
-    'assets/images/1.png',
-    'assets/images/2.png',
-    'assets/images/3.png',
+    'https://i.ibb.co/KyrCthP/1.jpg',
+    'https://i.ibb.co/sQrt8dZ/2.jpg',
+    'https://i.ibb.co/CQVWF7d/3.jpg',
   ];
 
   void _changeImage(int newIndex) {
@@ -63,11 +62,11 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   void _onPonermePressed() {
-    // Accion del boton
+    // Acción del botón
   }
 
   void _onDescartarPressed() {
-    // Accion del boton
+    // Acción del botón
   }
 
   @override
@@ -76,6 +75,13 @@ class _HomeTabState extends State<HomeTab> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Text(
+            '¿Qué vas a usar hoy?',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -87,7 +93,16 @@ class _HomeTabState extends State<HomeTab> {
                   }
                 },
               ),
-              Image.asset(imagePaths[_currentImageIndex]),
+              Image.network(
+                imagePaths[_currentImageIndex],
+                loadingBuilder: (context, child, progress) {
+                  if (progress == null) return child;
+                  return CircularProgressIndicator();
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(Icons.error);
+                },
+              ),
               IconButton(
                 icon: Icon(Icons.arrow_forward),
                 onPressed: () {
@@ -158,5 +173,4 @@ class UserTab extends StatelessWidget {
         ],
       ),
     );
-  }
-}
+  }}
